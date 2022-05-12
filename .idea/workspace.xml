@@ -128,6 +128,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -173,6 +174,7 @@
       <workItem from="1541041490642" duration="3210000" />
       <workItem from="1541101236514" duration="3928000" />
       <workItem from="1541694177811" duration="58000" />
+      <workItem from="1652382860684" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary="First part of lab3">
       <created>1541036854341</created>
