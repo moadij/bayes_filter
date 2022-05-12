@@ -492,12 +492,34 @@ public class theRobot extends JFrame {
 
 
         // Check if the sensor is right (check if there are walls)
+        double prediction = 1;
 
+        if (map[i-1][j] == sonarNorth) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
 
-        // the sensor is right - Ps
-        // the sensor is wrong - 1-Ps
+        if (map[i+1][j] == sonarSouth) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
+
+        if (map[i][j+1] == sonarEast) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
+
+        if (map[i][j-1] == sonarWest) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction*= (1-sensorAccuracy);
+        }
+
         // multiply the probability by this and update the probability
-
+        probs[i][j] *= prediction;
 
     }
 
