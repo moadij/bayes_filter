@@ -272,6 +272,9 @@ public class theRobot extends JFrame {
     
     // store your computed value of being in each state (x, y)
     double[][] Vs;
+
+    // map
+    int[][] map = mundo.grid;   // 0: empty square; 1: wall; 2: stairwell; 3: goal
     
     public theRobot(String _manual, int _decisionDelay) {
         // initialize variables as specified from the command-line
@@ -402,6 +405,7 @@ public class theRobot extends JFrame {
         
         myMaps.updateProbs(probs);
     }
+
       // TODO: update the probabilities of where the AI thinks it is based on the action selected and the new sonar readings
     //       To do this, you should update the 2D-array "probs"
     // Note: sonars is a bit string with four characters, specifying the sonar reading in the direction of North, South, East, and West
@@ -409,8 +413,132 @@ public class theRobot extends JFrame {
     void updateProbabilities(int action, String sonars) {
         // your code
 
+
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                if (map[i][j] != 1) {    // 0: empty square; 1: wall; 2: stairwell; 3: goal
+                    stateTransition(action, i, j);
+                    sensorReading(sonars, i, j);
+                    normalize();
+                }
+            }
+        }
+
+        //      for int i (0 to width):
+        //          for int j (0 to height):
+        //              if board[i][j] == 0 (white block)
+        //                  stateTransition(action) (4 neighbors' probabilities - KEEP THE ORDER)
+        //                  sensorReading(sonars) -
+        //                  normalize
+
+
         myMaps.updateProbs(probs); // call this function after updating your probabilities so that the
                                    //  new probabilities will show up in the probability map on the GUI
+    }
+
+    void stateTransition(int action, int i, int j) {    // 0: North, 1: South, 2: East, 3: West, 4: Stay
+        // Each neighbor's probability
+        double probNorth = probs[i-1][j];
+        double probSouth = probs[i+1][j];
+        double probEast = probs[i][j+1];
+        double probWest = probs[i][j-1];
+
+        // Calculate the probabilities of each direction
+        double up, down, left, right, stay;
+        if (action == 0) {
+            up = moveProb;
+            down = (1-moveProb)/4;
+            left = (1-moveProb)/4;
+            right = (1-moveProb)/4;
+            stay = (1-moveProb)/4;
+        } else if (action == 1) {
+            down = moveProb;
+            up = (1-moveProb)/4;
+            left = (1-moveProb)/4;
+            right = (1-moveProb)/4;
+            stay = (1-moveProb)/4;
+        } else if (action == 2) {
+            left = moveProb;
+            down = (1-moveProb)/4;
+            right = (1-moveProb)/4;
+            up = (1-moveProb)/4;
+            stay = (1-moveProb)/4;
+        } else if (action == 3) {
+            right = moveProb;
+            down = (1-moveProb)/4;
+            left = (1-moveProb)/4;
+            up = (1-moveProb)/4;
+            stay = (1-moveProb)/4;
+        } else {   // action == 4
+            stay = moveProb;
+            down = (1-moveProb)/4;
+            left = (1-moveProb)/4;
+            right = (1-moveProb)/4;
+            up = (1-moveProb)/4;
+        }
+
+        // Calculate the new probability at map[i][j]
+        double origProb = probs[i][j];
+        double newProb = origProb*stay + probSouth*up + probNorth*down * probEast*left + probWest*right;
+        probs[i][j] = newProb;
+
+    }
+
+    void sensorReading(String sonars, int i, int j) {   // 0: false, 1: true
+        int sonarNorth = Integer.parseInt(String.valueOf(sonars.charAt(0)));
+        int sonarSouth = Integer.parseInt(String.valueOf(sonars.charAt(1)));
+        int sonarEast = Integer.parseInt(String.valueOf(sonars.charAt(2)));
+        int sonarWest = Integer.parseInt(String.valueOf(sonars.charAt(3)));
+
+
+        // Check if the sensor is right (check if there are walls)
+        double prediction = 1;
+
+        if (map[i-1][j] == sonarNorth) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
+
+        if (map[i+1][j] == sonarSouth) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
+
+        if (map[i][j+1] == sonarEast) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction *= (1-sensorAccuracy);
+        }
+
+        if (map[i][j-1] == sonarWest) {
+            prediction *= sensorAccuracy;
+        } else {
+            prediction*= (1-sensorAccuracy);
+        }
+
+        // multiply the probability by this and update the probability
+        probs[i][j] *= prediction;
+
+    }
+
+    void normalize() {
+        // Calculate alpha
+        double sum = 0;
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                sum += probs[i][j];
+            }
+        }
+        double alpha = 1/sum;
+
+        // Multiply each entry in P' by alpha
+        for (int i = 0; i < getWidth(); i++) {
+            for (int j = 0; j < getHeight(); j++) {
+                probs[i][j] *= alpha;
+            }
+        }
     }
 
 
