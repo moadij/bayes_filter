@@ -1,8 +1,5 @@
 package Server;
-import javax.swing.*;
-import java.awt.event.*;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.lang.*;
 import javax.swing.JComponent;
@@ -17,63 +14,63 @@ import java.net.*;
 
 class MyCanvas extends JComponent {
     int winWidth, winHeight;
-    double sqrWdth, sqrHght;
+    double squareWidth, squareHeight;
     Color gris = new Color(170,170,170);
     Color myWhite = new Color(220, 220, 220);
     
-    int xpos, ypos;
+    int xPosition, yPosition;
 
-    World mundo;
+    World world;
     
     public MyCanvas(int w, int h, World wld, int _x, int _y) {
-        mundo = wld;
+        world = wld;
         winWidth = w;
         winHeight = h;
         updatePosition(_x, _y);
         
-        sqrWdth = (double)w / mundo.width;
-        sqrHght = (double)h / mundo.height;
+        squareWidth = (double)w / world.width;
+        squareHeight = (double)h / world.height;
     }
     
     public void updatePosition(int _x, int _y) {
-        xpos = _x;
-        ypos = _y;
+        xPosition = _x;
+        yPosition = _y;
         
         repaint();
     }
     
     public void paint(Graphics g) {
-        for (int y = 0; y < mundo.height; y++) {
-            for (int x = 0; x < mundo.width; x++) {
-                if (mundo.grid[x][y] == 1) {
+        for (int y = 0; y < world.height; y++) {
+            for (int x = 0; x < world.width; x++) {
+                if (world.grid[x][y] == 1) {
                     g.setColor(Color.black);
-                    g.fillRect((int)(x * sqrWdth), (int)(y * sqrHght), (int)sqrWdth, (int)sqrHght);
+                    g.fillRect((int)(x * squareWidth), (int)(y * squareHeight), (int) squareWidth, (int) squareHeight);
                 }
-                else if (mundo.grid[x][y] == 0) {
+                else if (world.grid[x][y] == 0) {
                     g.setColor(myWhite);
-                    g.fillRect((int)(x * sqrWdth), (int)(y * sqrHght), (int)sqrWdth, (int)sqrHght);
+                    g.fillRect((int)(x * squareWidth), (int)(y * squareHeight), (int) squareWidth, (int) squareHeight);
                 }
-                else if (mundo.grid[x][y] == 2) {
+                else if (world.grid[x][y] == 2) {
                     g.setColor(Color.red);
-                    g.fillRect((int)(x * sqrWdth), (int)(y * sqrHght), (int)sqrWdth, (int)sqrHght);
+                    g.fillRect((int)(x * squareWidth), (int)(y * squareHeight), (int) squareWidth, (int) squareHeight);
                 }
-                else if (mundo.grid[x][y] == 3) {
+                else if (world.grid[x][y] == 3) {
                     g.setColor(Color.green);
-                    g.fillRect((int)(x * sqrWdth), (int)(y * sqrHght), (int)sqrWdth, (int)sqrHght);
+                    g.fillRect((int)(x * squareWidth), (int)(y * squareHeight), (int) squareWidth, (int) squareHeight);
                 }
             }
             if (y != 0) {
                 g.setColor(gris);
-                g.drawLine(0, (int)(y * sqrHght), (int)winWidth, (int)(y * sqrHght));
+                g.drawLine(0, (int)(y * squareHeight), (int)winWidth, (int)(y * squareHeight));
             }
         }
-        for (int x = 0; x < mundo.width; x++) {
+        for (int x = 0; x < world.width; x++) {
                 g.setColor(gris);
-                g.drawLine((int)(x * sqrWdth), 0, (int)(x * sqrWdth), (int)winHeight);
+                g.drawLine((int)(x * squareWidth), 0, (int)(x * squareWidth), (int)winHeight);
         }
         
         g.setColor(Color.blue);
-        g.fillOval((int)(xpos * sqrWdth)+1, (int)(ypos * sqrHght)+1, (int)(sqrWdth-1.4), (int)(sqrHght-1.4));
+        g.fillOval((int)(xPosition * squareWidth)+1, (int)(yPosition * squareHeight)+1, (int)(squareWidth -1.4), (int)(squareHeight -1.4));
     }
 }
 
@@ -84,10 +81,10 @@ public class BayesWorld extends JFrame {
     public static final int WEST = 3;
     public static final int STAY = 4;
 
-    Color bkgroundColor = new Color(230,230,230);
+    Color backgroundColor = new Color(230,230,230);
     static MyCanvas canvas;
-    World mundo;
-    int xpos, ypos;
+    World world;
+    int xPosition, yPosition;
     double moveProb, sensorAccuracy;
     
     ServerSocket serverSocket;
@@ -97,10 +94,10 @@ public class BayesWorld extends JFrame {
     
     Random rand;
     
-    public BayesWorld(String fnombre, double _moveProb, double _sensorAccuracy, String _known) {
+    public BayesWorld(String f, double _moveProb, double _sensorAccuracy, String _known) {
         rand = new Random();
     
-        mundo = new World(fnombre);
+        world = new World(f);
         int width = 500;
         int height = 500;
         moveProb = _moveProb;
@@ -110,16 +107,16 @@ public class BayesWorld extends JFrame {
     
         int bar = 20;
         setSize(width,height+bar);
-        getContentPane().setBackground(bkgroundColor);
+        getContentPane().setBackground(backgroundColor);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(0, 0, width, height+bar);
-        canvas = new MyCanvas(width, height, mundo, xpos, ypos);
+        canvas = new MyCanvas(width, height, world, xPosition, yPosition);
         getContentPane().add(canvas);
         
         setVisible(true);
         setTitle("BayesWorld");
         
-        getConnection(3333, fnombre, _known);
+        getConnection(3333, f, _known);
         survive();
     }
     
@@ -140,8 +137,8 @@ public class BayesWorld extends JFrame {
             
             if (_known.equals("known")) {
                 sout.println("known");
-                sout.println(xpos);
-                sout.println(ypos);
+                sout.println(xPosition);
+                sout.println(yPosition);
             }
             else {
                 sout.println("unknown");
@@ -158,39 +155,39 @@ public class BayesWorld extends JFrame {
             //ypos = rand.nextInt(mundo.height);
             
             // random initial position in bottom right quadrant
-            xpos = rand.nextInt(mundo.width / 2) + (mundo.width/2);
-            ypos = rand.nextInt(mundo.height / 2) + (mundo.height/2);
+            xPosition = rand.nextInt(world.width / 2) + (world.width/2);
+            yPosition = rand.nextInt(world.height / 2) + (world.height/2);
     
-            if (mundo.grid[xpos][ypos] == 0)
+            if (world.grid[xPosition][yPosition] == 0)
                 break;
         }
     }
     
     void moveIt(int action) {
-        int oldx = xpos, oldy = ypos;
+        int oldXPosition = xPosition, oldYPosition = yPosition;
         
         switch (action) {
             case NORTH: // up
-                ypos --;
+                yPosition--;
                 break;
             case SOUTH:
-                ypos ++;
+                yPosition++;
                 break;
             case WEST:
-                xpos --;
+                xPosition--;
                 break;
             case EAST: //
-                xpos ++;
+                xPosition++;
                 break;
             case 4: // stay
                 break;
         }
         
-        if (mundo.grid[xpos][ypos] == 1) {
-            xpos = oldx;
-            ypos = oldy;
+        if (world.grid[xPosition][yPosition] == 1) {
+            xPosition = oldXPosition;
+            yPosition = oldYPosition;
         }
-        canvas.updatePosition(xpos, ypos);
+        canvas.updatePosition(xPosition, yPosition);
     }
     
     void moveRobot(int action) {
@@ -211,7 +208,7 @@ public class BayesWorld extends JFrame {
         double value = rand.nextInt(1001) / 1001.0;
         String reading = "";
         // north
-        if (mundo.grid[xpos][ypos-1] == 1) { // it is a wall
+        if (world.grid[xPosition][yPosition -1] == 1) { // it is a wall
             if (value <= sensorAccuracy)
                 reading += "1";
             else
@@ -225,7 +222,7 @@ public class BayesWorld extends JFrame {
         }
         // south
         value = rand.nextInt(1001) / 1001.0;
-        if (mundo.grid[xpos][ypos+1] == 1) { // it is a wall
+        if (world.grid[xPosition][yPosition +1] == 1) { // it is a wall
             if (value <= sensorAccuracy)
                 reading += "1";
             else
@@ -239,7 +236,7 @@ public class BayesWorld extends JFrame {
         }
         // east
         value = rand.nextInt(1001) / 1001.0;
-        if (mundo.grid[xpos+1][ypos] == 1) { // it is a wall
+        if (world.grid[xPosition +1][yPosition] == 1) { // it is a wall
             if (value <= sensorAccuracy)
                 reading += "1";
             else
@@ -253,7 +250,7 @@ public class BayesWorld extends JFrame {
         }
         // west
         value = rand.nextInt(1001) / 1001.0;
-        if (mundo.grid[xpos-1][ypos] == 1) { // it is a wall
+        if (world.grid[xPosition -1][yPosition] == 1) { // it is a wall
             if (value <= sensorAccuracy)
                 reading += "1";
             else
@@ -282,13 +279,13 @@ public class BayesWorld extends JFrame {
                 
                 String sonars = getSonarReadings();
                 System.out.println(sonars);
-                if (mundo.grid[xpos][ypos] == 3) {
+                if (world.grid[xPosition][yPosition] == 3) {
                     System.out.println("Winner");
                     //sout.println("win");
                     sonars += "winner";
                     theEnd = true;
                 }
-                else if (mundo.grid[xpos][ypos] == 2) {
+                else if (world.grid[xPosition][yPosition] == 2) {
                     System.out.println("Loser");
                     //sout.println("lose");
                     sonars += "loser";
@@ -302,7 +299,7 @@ public class BayesWorld extends JFrame {
                     break;
             }
             catch (IOException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("It took " + numMoves + " moves.");
