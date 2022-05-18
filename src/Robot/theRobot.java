@@ -206,9 +206,17 @@ class mySmartMap extends JComponent implements KeyListener {
         }
     }
 
-    
+
     public void keyPressed(KeyEvent e) {
-        //System.out.println("keyPressed");
+        // System.out.println("keyPressed");
+        if(e.getKeyCode()==KeyEvent.VK_UP)
+            currentKey = NORTH;
+        else if(e.getKeyCode()==KeyEvent.VK_DOWN)
+            currentKey = SOUTH;
+        else if(e.getKeyCode()==KeyEvent.VK_RIGHT)
+            currentKey = EAST;
+        else if(e.getKeyCode()==KeyEvent.VK_LEFT)
+            currentKey = WEST;
     }
     public void keyReleased(KeyEvent e) {
         //System.out.println("keyReleased");
@@ -274,7 +282,7 @@ public class theRobot extends JFrame {
     double[][] Vs;
 
     // map
-    int[][] map = mundo.grid;   // 0: empty square; 1: wall; 2: stairwell; 3: goal
+    int[][] map; // = mundo.grid;   // 0: empty square; 1: wall; 2: stairwell; 3: goal
     
     public theRobot(String _manual, int _decisionDelay) {
         // initialize variables as specified from the command-line
@@ -289,6 +297,8 @@ public class theRobot extends JFrame {
     
         // Read in the world
         mundo = new World(mundoName);
+
+        map = mundo.grid;
         
         // set up the GUI that displays the information you compute
         int width = 500;
