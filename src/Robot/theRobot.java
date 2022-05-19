@@ -424,8 +424,8 @@ public class theRobot extends JFrame {
         // your code
 
 
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
+        for (int i = 0; i < mundo.getWidth(); i++) {
+            for (int j = 0; j < mundo.getHeight(); j++) {
                 if (map[i][j] != 1) {    // 0: empty square; 1: wall; 2: stairwell; 3: goal
                     stateTransition(action, i, j);
                     sensorReading(sonars, i, j);
@@ -536,16 +536,16 @@ public class theRobot extends JFrame {
     void normalize() {
         // Calculate alpha
         double sum = 0;
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
+        for (int i = 0; i < mundo.getWidth(); i++) {
+            for (int j = 0; j < mundo.getHeight(); j++) {
                 sum += probs[i][j];
             }
         }
         double alpha = 1/sum;
 
         // Multiply each entry in P' by alpha
-        for (int i = 0; i < getWidth(); i++) {
-            for (int j = 0; j < getHeight(); j++) {
+        for (int i = 0; i < mundo.getWidth(); i++) {
+            for (int j = 0; j < mundo.getHeight(); j++) {
                 probs[i][j] *= alpha;
             }
         }

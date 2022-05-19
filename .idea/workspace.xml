@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18a5480-2917-4964-847d-cde27aa91258" name="Default Changelist" comment="Made the variables make sense">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="c18a5480-2917-4964-847d-cde27aa91258" name="Default Changelist" comment="took away bad initializer&#10;added arrow keys">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/META-INF/codeDistribution.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Robot/World.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Robot/World.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Robot/mySmartMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Robot/mySmartMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Robot/theRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Robot/theRobot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Server/BayesWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Server/BayesWorld.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Server/MyCanvas.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Server/MyCanvas.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robot/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robot/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Robot/theRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robot/theRobot.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +190,8 @@
       <workItem from="1541101236514" duration="3928000" />
       <workItem from="1541694177811" duration="58000" />
       <workItem from="1652382860684" duration="16000" />
-      <workItem from="1652831926638" duration="1464000" />
+      <workItem from="1652831926638" duration="3610000" />
+      <workItem from="1652987473811" duration="1840000" />
     </task>
     <task id="LOCAL-00001" summary="First part of lab3">
       <created>1541036854341</created>
@@ -228,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541107255260</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="took away bad initializer&#10;added arrow keys">
+      <created>1652833905548</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1652833905548</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -289,7 +303,8 @@
     <MESSAGE value="First part of lab3" />
     <MESSAGE value="Part 3 setup" />
     <MESSAGE value="Part 3 reorganized sources" />
-    <option name="LAST_COMMIT_MESSAGE" value="Part 3 reorganized sources" />
+    <MESSAGE value="took away bad initializer&#10;added arrow keys" />
+    <option name="LAST_COMMIT_MESSAGE" value="took away bad initializer&#10;added arrow keys" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Server/BayesWorld.class" />
