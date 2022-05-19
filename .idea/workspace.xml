@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c18a5480-2917-4964-847d-cde27aa91258" name="Default Changelist" comment="working version (just needs x and y fixed)" />
+    <list default="true" id="c18a5480-2917-4964-847d-cde27aa91258" name="Default Changelist" comment="initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/codeDistribution/Robot/theRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/codeDistribution/Robot/theRobot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robot/theRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robot/theRobot.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +25,7 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$/../.." value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -153,7 +158,7 @@
     <configuration name="Server" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Server.BayesWorld" />
       <module name="codeDistribution" />
-      <option name="PROGRAM_PARAMETERS" value="mundo_maze.txt .95 .9 unknown" />
+      <option name="PROGRAM_PARAMETERS" value="mundo_maze.txt .9 .8 unknown" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -181,7 +186,8 @@
       <workItem from="1541694177811" duration="58000" />
       <workItem from="1652382860684" duration="16000" />
       <workItem from="1652831926638" duration="3610000" />
-      <workItem from="1652987473811" duration="2213000" />
+      <workItem from="1652987473811" duration="5003000" />
+      <workItem from="1652999146261" duration="295000" />
     </task>
     <task id="LOCAL-00001" summary="First part of lab3">
       <created>1541036854341</created>
@@ -239,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652994120954</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="initial commit">
+      <created>1652994566571</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1652994566571</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -302,7 +315,34 @@
     <MESSAGE value="Part 3 reorganized sources" />
     <MESSAGE value="took away bad initializer&#10;added arrow keys" />
     <MESSAGE value="working version (just needs x and y fixed)" />
-    <option name="LAST_COMMIT_MESSAGE" value="working version (just needs x and y fixed)" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Robot/theRobot.java</url>
+          <line>382</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Robot/theRobot.java</url>
+          <line>415</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Robot/theRobot.java</url>
+          <line>450</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Robot/theRobot.java</url>
+          <line>543</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Server/BayesWorld.class" />

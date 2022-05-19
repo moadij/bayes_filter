@@ -448,10 +448,10 @@ public class theRobot extends JFrame {
 
     void stateTransition(int action, int i, int j) {    // 0: North, 1: South, 2: East, 3: West, 4: Stay
         // Each neighbor's probability
-        double probNorth = probs[i-1][j];
-        double probSouth = probs[i+1][j];
-        double probEast = probs[i][j+1];
-        double probWest = probs[i][j-1];
+        double probNorth = probs[i][j+1];
+        double probSouth = probs[i][j-1];
+        double probEast = probs[i-1][j];
+        double probWest = probs[i+1][j];
 
         // Calculate the probabilities of each direction
         double up, down, left, right, stay;
@@ -504,25 +504,25 @@ public class theRobot extends JFrame {
         // Check if the sensor is right (check if there are walls)
         double prediction = 1;
 
-        if (map[i-1][j] == sonarNorth) {
+        if (map[i][j-1] == sonarNorth) {
             prediction *= sensorAccuracy;
         } else {
             prediction *= (1-sensorAccuracy);
         }
 
-        if (map[i+1][j] == sonarSouth) {
+        if (map[i][j+1] == sonarSouth) {
             prediction *= sensorAccuracy;
         } else {
             prediction *= (1-sensorAccuracy);
         }
 
-        if (map[i][j+1] == sonarEast) {
+        if (map[i+1][j] == sonarEast) {
             prediction *= sensorAccuracy;
         } else {
             prediction *= (1-sensorAccuracy);
         }
 
-        if (map[i][j-1] == sonarWest) {
+        if (map[i-1][j] == sonarWest) {
             prediction *= sensorAccuracy;
         } else {
             prediction*= (1-sensorAccuracy);
@@ -536,16 +536,16 @@ public class theRobot extends JFrame {
     void normalize() {
         // Calculate alpha
         double sum = 0;
-        for (int i = 0; i < mundo.getWidth(); i++) {
-            for (int j = 0; j < mundo.getHeight(); j++) {
+        for (int i = 0; i < mundo.getHeight(); i++) {
+            for (int j = 0; j < mundo.getWidth(); j++) {
                 sum += probs[i][j];
             }
         }
         double alpha = 1/sum;
 
         // Multiply each entry in P' by alpha
-        for (int i = 0; i < mundo.getWidth(); i++) {
-            for (int j = 0; j < mundo.getHeight(); j++) {
+        for (int i = 0; i < mundo.getHeight(); i++) {
+            for (int j = 0; j < mundo.getWidth(); j++) {
                 probs[i][j] *= alpha;
             }
         }
